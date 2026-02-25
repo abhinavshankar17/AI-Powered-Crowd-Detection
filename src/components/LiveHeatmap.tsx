@@ -116,9 +116,13 @@ const LiveHeatmap: React.FC = () => {
 
             // Resize
             const rect = canvas.getBoundingClientRect();
-            if (canvas.width !== rect.width || canvas.height !== rect.height) {
-                canvas.width = rect.width;
-                canvas.height = rect.height;
+            const dpr = window.devicePixelRatio || 1;
+            const targetWidth = Math.floor(rect.width * dpr);
+            const targetHeight = Math.floor(rect.height * dpr);
+
+            if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
+                canvas.width = targetWidth;
+                canvas.height = targetHeight;
             }
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
